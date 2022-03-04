@@ -1,0 +1,21 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: gateway-demo
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: first-rout
+          uri: lb://HELLO-APPLICATION
+          predicates:
+            - Path=/hello
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
