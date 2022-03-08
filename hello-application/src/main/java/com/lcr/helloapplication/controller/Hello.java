@@ -28,7 +28,15 @@ public class Hello {
     @GetMapping("/hello")
     public String hello(){
         ValueOperations valueOperations = redisTemplate.opsForValue();
-        valueOperations.setIfAbsent("k1","v1",10, TimeUnit.MINUTES);
+//        valueOperations.setIfAbsent("k1","v1",10, TimeUnit.MINUTES);
+//        valueOperations.setIfAbsent("k1","v2",10, TimeUnit.MINUTES);
+        valueOperations.setIfPresent("k1","v3");
         return "hello";
+    }
+    @GetMapping("/bye")
+    public String bye(){
+        ValueOperations valueOperations = redisTemplate.opsForValue();
+        Object k1 = valueOperations.get("k1");
+        return k1.toString();
     }
 }
